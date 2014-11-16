@@ -1,0 +1,60 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+  ..\FrameXML\UI.xsd">
+  <Script file="Preech_Buff.lua"/>
+
+  <Frame name="PreechBuffFrame">
+    <Scripts>
+      <OnLoad>
+        Buff_OnLoad(self);
+      </OnLoad>
+      <OnEvent>
+        Buff_OnEvent(self, event, ...);
+      </OnEvent>
+      <OnUpdate>
+        Preech_Buff_OnUpdate(self, elapsed);
+      </OnUpdate>
+    </Scripts>
+  </Frame>
+  
+  <Button name="Preech_Buff_KeyButton" inherits="SecureActionButtonTemplate" parent="UIParent" toplevel="true" hidden="true" frameStrata="LOW" movable="true">
+    <NormalTexture file="Interface\Icons\Spell_Nature_Purge"/>
+    <Size>
+      <AbsDimension x="32" y="32"/>
+    </Size>    
+    <Anchors>
+      <Anchor point="CENTER">
+        <Offset>
+         <AbsDimension x="0" y="100" />
+       </Offset>
+     </Anchor>
+   </Anchors>
+   <Layers>
+    <Layer level="BACKGROUND">
+     <Texture setAllPoints="true">
+       <Color a="0.3" r="0.2" g="0" b="0"/>
+     </Texture>
+   </Layer>
+ </Layers>    
+ <Scripts>
+   <OnLoad>
+    self:EnableMouse(true);
+    self:EnableKeyboard(false);      
+    self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+
+    self:SetScript("PreClick", Buff_OnPreClick);
+    self:SetScript("PostClick", Buff_OnPostClick);
+    
+    self.title = self:CreateFontString(nil, "OVERLAY");
+    self.title:SetFontObject("GameFontNormal");
+    self.title:SetAllPoints(self);
+    self.title:SetText("PB");
+    
+    self:SetAttribute("type", "spell");
+    self:SetAttribute("unit", nil);
+    self:SetAttribute("spell", nil);
+    self:SetAttribute("item", nil);
+    self:SetAttribute("target-slot", nil);        
+  </OnLoad>
+</Scripts>    
+</Button>
+</Ui>
