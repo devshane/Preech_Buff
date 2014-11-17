@@ -42,7 +42,11 @@ function Buff_OnPreClick(self, button, down)
             macro = '/cast ' .. PW_FORT;
         else
             INV_SLOT_MAIN_HAND = 16;
-            POLES = { 45858; } -- Nat's Lucky Fishing Pole
+            POLES = {
+                6367,     -- Big Iron Fishing Pole
+                19022,    -- Nat Pagle's Extreme Angler FC-5000
+                45858,    -- Nat's Lucky Fishing Pole
+            };
             mh = GetInventoryItemID('player', INV_SLOT_MAIN_HAND);
             for p in pairs(POLES) do
                 if mh == POLES[p] then
